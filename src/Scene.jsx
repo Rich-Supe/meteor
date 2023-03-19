@@ -1,7 +1,16 @@
+import { NodeToyMaterial } from "@nodetoy/react-nodetoy";
 import { useGLTF, useTexture } from "@react-three/drei";
+import { data as sparklesShader } from "./sparkles-shader";
 
 export default function Scene() {
-  const { nodes } = useGLTF("/assets/models/scene.glb");
+  /**
+    Models used:
+    https://sketchfab.com/3d-models/astronaut-dfde0bf25e2b44809c08105c30610694
+    https://sketchfab.com/3d-models/tripod-omni-directional-lamp-d7ee949704c24ddab792184fcfde0016#download
+    https://sketchfab.com/3d-models/steampunk-pipes-and-valves-9d0d9bd35e1744a4a7b258299c0cffaa#download
+    https://sketchfab.com/3d-models/explorer-t30-concept-rover-cf05f52b5d364a00a7af3e94731055bf
+   */
+  const { nodes } = useGLTF("assets/models/scene.glb");
 
   const [
     ground,
@@ -27,6 +36,10 @@ export default function Scene() {
     <>
       <mesh geometry={nodes.ground.geometry}>
         <meshBasicMaterial map={ground} />
+      </mesh>
+
+      <mesh geometry={nodes.ground.geometry}>
+        <NodeToyMaterial data={sparklesShader} />
       </mesh>
 
       <mesh geometry={nodes.ground2.geometry}>
